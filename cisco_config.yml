@@ -1,0 +1,12 @@
+---
+
+ - name: Add a banner 
+   hosts: 192.168.19.10
+   connection: local
+   gather_facts: no
+   tasks:
+   - name: Create a new banner
+     ios_config:
+       lines:
+         - banner motd "back off intruder"
+  
