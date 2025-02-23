@@ -1,12 +1,29 @@
 ---
 
- - name: Add a banner 
-   hosts: 192.168.19.10
-   connection: local
+ - name: banner & interface config  
+   hosts: 192.168.19.5
+   connection: network_cli
    gather_facts: no
+   vars:
+     ip_address_e0: "192.168.10.1 255.255.255.0"
+     ip_address_e1: "192.168.20.1 255.255.255.0"
+     ip_address_e2: "192.168.30.1 255.255.255.0"
    tasks:
    - name: Create a new banner
      ios_config:
        lines:
          - banner motd "back off intruder"
-  
+         
+   - name: config interface g
+     ios_config:
+       lines:
+         - interface Ethernet2/0
+         - ip address {{ip_address_e0}}
+         - no shut
+         - interface Ethernet2/1
+         - ip address {{ip_address_e1}}
+         - no shut
+         - interface Ethernet2/2
+         - ip address {{ip_address_e2}}
+         - no shut 
+         - exit
