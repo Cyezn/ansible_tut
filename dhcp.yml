@@ -1,0 +1,22 @@
+---
+
+- name: dhcp config
+  hosts: 192.168.19.5
+  connection: network_cli
+  gather_facts: no
+
+  vars:
+    dhcp_pool_name: net1
+    dhcp_network: 192.168.19.0 255.255.255.0
+    dhcp_default_router: 192.168.19.10
+    dhcp_dns_servers: "8.8.8.8"
+    dhcp_lease: 7
+  tasks:
+  - name: dhcp pool config 
+    ios_config:
+      lines:
+        - ip dhcp poo {{dhcp_pool_name}}
+        - network {{dhcp_network}}
+        - default-router {{dhcp_default_router}}
+        - dns-server {{dhcp_dns_servers}}
+        - lease {{dhcp_lease}}
