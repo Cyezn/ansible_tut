@@ -1,0 +1,21 @@
+---
+ - name: collect devices information
+   hosts: 192.168.19.5
+   connection: network_cli
+   tasks:
+   - name: collect info
+     ios_command:
+       commands: 
+       - show interface
+       - show run
+       - sh ip default-gateway
+       - sh ip route
+       - sh ip ssh
+       - sh ip dhcp pool
+     register: sh_int
+ 
+   - name: "Task2: debugg >> output"
+     ansible.builtin.debug: 
+      msg: "{{sh_int}}"
+
+   
