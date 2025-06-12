@@ -1,1 +1,4 @@
-192.168.19.5 ansible_user=cye ansible_password=eddie ansible_connection=network_cli ansible_network_os=ios ansible_become=yes ansible_become_method=enable ansible_become_password=eddie
+r92.168.19.5 ansible_user=cye ansible_password=eddie ansible_connection=network_cli ansible_network_os=ios ansible_become=yes ansible_become_method=enable ansible_become_password=eddie
+
+
+#this is a comment
