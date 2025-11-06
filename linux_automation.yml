@@ -1,0 +1,17 @@
+---
+
+- name: inux Automation Playbook
+  hosts: cye@192.168.70.142
+  become: yes
+
+  tasks:
+  - name: gathering facts
+    ansible.builtin.debug:
+      msg: "gathering facts"
+
+
+
+
+
+
+

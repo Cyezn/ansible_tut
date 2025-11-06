@@ -1,0 +1,15 @@
+variable "filename" {
+    type = string
+    default = "servers.txt"
+}
+
+variable "content" {
+    type = map(string)
+    default = {
+        server1 = "192.168.1.1"
+        server2 = "192.168.1.2"
+        server3 = "192.168.1.3"
+        server4 = "192.168.1.4"
+        server5 = "192.168.1.5"
+    }
+}
