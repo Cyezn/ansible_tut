@@ -1,0 +1,25 @@
+---
+- name: Install Docker on Ubuntu 24.04 (Noble)
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt
+      apt:
+        update_cache: yes
+
+    - name: Install Docker from Ubuntu repo
+      apt:
+        name:
+          - docker.io
+          - containerd
+        state: present
+
+    - name: Enable and start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    - name: Verify Docker installation
+      command: docker --version
+      register: docker_version  

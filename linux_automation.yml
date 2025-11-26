@@ -1,14 +1,40 @@
 ---
-
-- name: inux Automation Playbook
-  hosts: cye@192.168.70.142
+- name: Linux Automation Playbook
+  hosts: mainserver
   become: yes
+  gather_facts: yes
 
   tasks:
-  - name: gathering facts
-    ansible.builtin.debug:
-      msg: "gathering facts"
+    - name: Ensure pip3 is installed
+      ansible.builtin.yum:
+        name: python3-pip
+        state: present
 
+    - name: Install Docker SDK for Python
+      ansible.builtin.pip:
+        name: docker
+        state: present
+
+    - name: Show update message
+      ansible.builtin.debug:
+        msg: "Updating packages..."
+
+    - name: Update all packages
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+
+    - name: Create a Redis container
+      community.docker.docker_container:
+        name: myredis
+        image: redis:latest
+        command: redis-server --appendonly yes
+        state: started
+        restart_policy: always
+        ports:
+          - "6379:6379"
+        volumes:
+          - /data/redis:/data
 
 
 
